@@ -1,19 +1,12 @@
-import {
-  Controller,
-  Get,
-  Header,
-  Post,
-  Redirect,
-  Req,
-  Body,
-  Put,
-  Delete,
-} from '@nestjs/common';
+import {Controller,Get,Header,Post,Redirect,Req,Body,Put,Delete} from '@nestjs/common';
 import { UsuarioRepository } from './usuario.repository';
 
 @Controller('/usuarios')
 export class UsuarioController {
-  private usuarioRepository = new UsuarioRepository();
+  
+  constructor(private usuarioRepository: UsuarioRepository){
+
+  }
   @Post()
   @Header('Cache-Control', 'teste')
   async criarUsuario(@Body() dadosDousuario: string) {
