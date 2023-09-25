@@ -8,4 +8,7 @@ export class UsuarioRepository {
   async listar(){
     return this.usuario
   }
+  async atualizar(){
+    this.usuario.pop()
+  }
 }

@@ -17,13 +17,15 @@ export class UsuarioController {
   @Post()
   @Header('Cache-Control', 'teste')
   async criarUsuario(@Body() dadosDousuario: string) {
-    this.usuarioRepository.salvar(dadosDousuario);
+    this.usuarioRepository.
+    salvar(dadosDousuario);
     return dadosDousuario;
   }
 
   @Get()
   @Header('Cache-Control', 'teste')
   async ListarUsuario(dadosDousuario: string) {
+    
     return this.usuarioRepository.listar();
   }
 
