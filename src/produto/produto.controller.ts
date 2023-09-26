@@ -1,5 +1,6 @@
 import {Controller,Get,Header,Post,Redirect,Req,Body,Put,Delete} from '@nestjs/common';
 import { ProdutoRepository } from './produto.repository';
+import { CriaUsuarioDTO } from 'src/usuario/dto/CriarUsuario.dto';
 
 @Controller('/produtos')
 export class ProdutoController {
@@ -9,7 +10,7 @@ export class ProdutoController {
   }
   @Post()
   @Header('Cache-Control', 'teste')
-  async criarUsuario(@Body() dadosProduto: string) {
+  async criarUsuario(@Body() dadosProduto: CriaUsuarioDTO) {
     this.usuarioRepository.
     salvar(dadosProduto);
     return dadosProduto;

@@ -1,7 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
 
 @Injectable()
-export class UsuarioRepository {
+export class UsuarioRepository implements PipeTransform {
+  transform(value: any, metadata: ArgumentMetadata) {
+    const oneKb = 1000;
+    return value.size < oneKb;
+  }
   private usuario = [];
 
   async salvar(usuario) {
