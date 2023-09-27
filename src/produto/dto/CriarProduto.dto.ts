@@ -1,15 +1,15 @@
-import { IsNumber, IsString} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
 
 export class CriarProdutoDTO {
-  @IsString()
+  @IsNotEmpty({ message: 'Nome não pode ser vazio' })
   nome: string;
 
-  @IsNumber()
+  @IsString()
   valor: number;
 
-  @IsNumber()
+  @IsString()
   quantidadeDisponivel: number;
 
-  @IsString()
+  @IsNotEmpty({ message: 'Nome não pode ser vazio' })
   descricao: string;
 }

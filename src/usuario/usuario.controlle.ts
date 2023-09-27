@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Header,
-  Post,
-  Redirect,
-  Req,
-  Body,
-  Put,
-  Delete,
+import {  Controller,  Get,  Header,  Post,  Redirect,  Req,  Body,  Put,  Delete,
 } from '@nestjs/common';
 import { UsuarioRepository } from './usuario.repository';
 import { CriaUsuarioDTO } from './dto/CriarUsuario.dto';
