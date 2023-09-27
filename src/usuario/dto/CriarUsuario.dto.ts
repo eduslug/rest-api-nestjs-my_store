@@ -1,11 +1,13 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class CriaUsuarioDTO {
-  @IsString()
+  @IsString({ message: 'usuario não cadastrado corretamente' })
   @IsNotEmpty()
   nome: string;
-  @IsEmail()
+
+  @IsEmail(undefined, { message: '' })
   email: string;
-  @MinLength(6)
+
+  @MinLength(6, { message: '' })
   senha: string;
 }
