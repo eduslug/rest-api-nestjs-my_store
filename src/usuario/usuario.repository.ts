@@ -1,4 +1,5 @@
 import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
+import { usuarioEntity } from './usuario.entity';
 
 @Injectable()
 export class UsuarioRepository implements PipeTransform {
@@ -6,11 +7,10 @@ export class UsuarioRepository implements PipeTransform {
     const oneKb = 1000;
     return value.size < oneKb;
   }
-  private usuario = [];
+  private usuario: usuarioEntity[] = [];
 
-  async salvar(usuario) {
+  async salvar(usuario:usuarioEntity) {
     this.usuario.push(usuario);
-    console.log(this.usuario);
   }
   async listar() {
     return this.usuario;
@@ -21,7 +21,7 @@ export class UsuarioRepository implements PipeTransform {
   async compararEmail(email: string) {
     const possivelUsuario = this.usuario.find(
       (usuario) => usuario.email === email,
-    )
-    return this.compararEmail !== undefined
+    );
+    return this.compararEmail !== undefined;
   }
 }
