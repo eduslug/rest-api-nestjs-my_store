@@ -18,4 +18,10 @@ export class UsuarioRepository implements PipeTransform {
   async atualizar() {
     this.usuario.pop();
   }
+  async compararEmail(email: string) {
+    const possivelUsuario = this.usuario.find(
+      (usuario) => usuario.email === email,
+    )
+    return this.compararEmail !== undefined
+  }
 }
