@@ -9,7 +9,7 @@ export class UsuarioRepository implements PipeTransform {
   }
   private usuario: usuarioEntity[] = [];
 
-  async salvar(usuario:usuarioEntity) {
+  async salvar(usuario: usuarioEntity) {
     this.usuario.push(usuario);
   }
   async listar() {
@@ -24,20 +24,35 @@ export class UsuarioRepository implements PipeTransform {
     );
     return this.compararEmail !== undefined;
   }
-  async atualiza(id:string, dadosDeAtualizacao: Partial<usuarioEntity>){
-      const possivelUsuario = this.usuario.map(
-        usuarioSalvo => usuarioSalvo.id === id
-      );
-      if (!possivelUsuario){
-        throw 'usuario não existe'
-      }
-      Object.entries(dadosDeAtualizacao).forEach(([chave, valor])=>{
-          if( chave === 'id' ){
-            return;
-          }
 
-          possivelUsuario[chave] = valor;
-      })
-      return possivelUsuario
+  private buscaPorId(id: string) {
+    const possivelUsuario = this.usuario.find(
+      (usuarioSalvo) => usuarioSalvo.id === id,
+    );
+
+    if (!possivelUsuario) {
+      throw new Error('Usuário não existe');
+    }
+  }
+
+  async atualiza(id: string, dadosDeAtualizacao: Partial<usuarioEntity>) {
+    const usuario = this.buscaPorId(id);
+    Object.entries(dadosDeAtualizacao).forEach(([chave, valor]) => {
+      if (chave === 'id') {
+        return;
+      }
+
+      usuario[chave] = valor;
+    });
+
+    return usuario;
+  }
+
+  async remove(id: string) {
+    const usuario = this.buscaPorId(id);
+    this.usuario = this.usuario.filter(
+      (usuarioSalvo) => usuarioSalvo.id !== id,
+    );
+    return usuario;
   }
 }

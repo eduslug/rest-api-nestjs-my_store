@@ -1,4 +1,14 @@
-import {  Controller,  Get,  Header,  Post,  Redirect,  Req,  Body,  Put,  Delete,  Param,
+import {
+  Controller,
+  Get,
+  Header,
+  Post,
+  Redirect,
+  Req,
+  Body,
+  Put,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { UsuarioRepository } from './usuario.repository';
 import { CriaUsuarioDTO } from './dto/CriarUsuario.dto';
@@ -28,19 +38,23 @@ export class UsuarioController {
   }
 
   @Put('/:id')
-  async atualizaUsuario(@Param('id') id: string, @Body() novosUsuario: AtualizaUsuarioDTO) {
-     const usuarioAtualizado = await this.usuarioRepository.atualiza(id, novosUsuario)
+  async atualizaUsuario(
+    @Param('id') id: string,
+    @Body() novosUsuario: AtualizaUsuarioDTO,
+  ) {
+    const usuarioAtualizado = await this.usuarioRepository.atualiza(
+      id,
+      novosUsuario,
+    );
 
-     return {
-      usuario:usuarioAtualizado,
-      message:'usuario atualizado com sucesso'
-     }
+    return {
+      usuario: usuarioAtualizado,
+      message: 'usuario atualizado com sucesso',
+    };
   }
-  @Delete()
 
-
-  @Header('Cache-Control', 'teste')
-  async deletarUsuario(dadosDousuario: string) {
-    return dadosDousuario;
+  @Delete('/:id')
+  async removeUsuario(@Param('id') id: string) {
+    const usuarioRemovido = await this.usuarioRepository.remove(id);
   }
 }
