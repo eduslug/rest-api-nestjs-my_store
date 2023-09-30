@@ -24,4 +24,20 @@ export class UsuarioRepository implements PipeTransform {
     );
     return this.compararEmail !== undefined;
   }
+  async atualiza(id:string, dadosDeAtualizacao: Partial<usuarioEntity>){
+      const possivelUsuario = this.usuario.map(
+        usuarioSalvo => usuarioSalvo.id === id
+      );
+      if (!possivelUsuario){
+        throw 'usuario não existe'
+      }
+      Object.entries(dadosDeAtualizacao).forEach(([chave, valor])=>{
+          if( chave === 'id' ){
+            return;
+          }
+
+          possivelUsuario[chave] = valor;
+      })
+      return possivelUsuario
+  }
 }
